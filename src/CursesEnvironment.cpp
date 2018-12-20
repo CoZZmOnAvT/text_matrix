@@ -6,7 +6,7 @@
 /*   By: phrytsenko                                                           */
 /*                                                                            */
 /*   Created: 2018/12/18 17:42:27 by phrytsenko                               */
-/*   Updated: 2018/12/20 14:32:47 by phrytsenko                               */
+/*   Updated: 2018/12/20 17:56:34 by phrytsenko                               */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <ncursesw/curses.h>
 #include <signal.h>
 #include <sys/ioctl.h>
+#include "Window.hpp"
 #include "BasePainter.hpp"
 
 namespace curses {
@@ -31,6 +32,22 @@ Environment::~Environment()
 {
     signal(SIGWINCH, SIG_IGN);
     endwin();
+}
+
+void Environment::EnableColors() const
+{
+    if(has_colors() == false) {
+        throw std::runtime_error("Terminal does not support colored output");
+    }
+    start_color();
+    init_pair(color::Black, COLOR_BLACK, COLOR_BLACK);
+    init_pair(color::Red, COLOR_RED, COLOR_BLACK);
+    init_pair(color::Green, COLOR_GREEN, COLOR_BLACK);
+    init_pair(color::Yellow, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(color::Blue, COLOR_BLUE, COLOR_BLACK);
+    init_pair(color::Magenta, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(color::Cyan, COLOR_CYAN, COLOR_BLACK);
+    init_pair(color::White, COLOR_WHITE, COLOR_BLACK);
 }
 
 void Environment::Subscribe(std::shared_ptr<BasePainter> const &painter)

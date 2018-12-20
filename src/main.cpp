@@ -6,7 +6,7 @@
 /*   By: phrytsenko                                                           */
 /*                                                                            */
 /*   Created: 2018/12/18 17:40:58 by phrytsenko                               */
-/*   Updated: 2018/12/20 14:50:04 by phrytsenko                               */
+/*   Updated: 2018/12/20 17:57:31 by phrytsenko                               */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ int main(int argc, char* argv[])
 
     try {
         auto curses_env = std::make_unique<curses::Environment>();
+        curses_env->EnableColors();
 
         std::shared_ptr<curses::BasePainter> matrix_painter = std::make_shared<curses::MatrixPainter>(argv[1]);
 
         curses_env->Subscribe(matrix_painter);
-        curses_env->Dispatch(std::chrono::milliseconds(200));
+        curses_env->Dispatch(std::chrono::milliseconds(80));
         return EXIT_SUCCESS;
     } catch (std::exception const& e) {
         std::cout << argv[0] << ": " << e.what() << std::endl;

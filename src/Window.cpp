@@ -6,7 +6,7 @@
 /*   By: phrytsenko                                                           */
 /*                                                                            */
 /*   Created: 2018/12/18 17:42:27 by phrytsenko                               */
-/*   Updated: 2018/12/20 14:47:42 by phrytsenko                               */
+/*   Updated: 2018/12/20 17:52:19 by phrytsenko                               */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,20 @@ void Window::Update()
 {
     if (wrefresh(curses_win_.get()) == ERR) {
         throw std::runtime_error("Unable update the window");
+    }
+}
+
+void Window::ColorOn(short color)
+{
+    if (wattron(curses_win_.get(), COLOR_PAIR(color)) == ERR) {
+        throw std::runtime_error("Unable to turn on color");
+    }
+}
+
+void Window::ColorOff(short color)
+{
+    if (wattroff(curses_win_.get(), COLOR_PAIR(color)) == ERR) {
+        throw std::runtime_error("Unable to turn off color");
     }
 }
 

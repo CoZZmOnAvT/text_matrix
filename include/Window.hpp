@@ -6,7 +6,7 @@
 /*   By: phrytsenko                                                           */
 /*                                                                            */
 /*   Created: 2018/12/18 17:42:23 by phrytsenko                               */
-/*   Updated: 2018/12/20 14:47:14 by phrytsenko                               */
+/*   Updated: 2018/12/20 17:53:02 by phrytsenko                               */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <ncursesw/curses.h>
 #include <memory>
 #include <utility>
+#include "CursesEnvironment.hpp"
 
 namespace curses {
 
@@ -28,6 +29,9 @@ class Window {
 
     void Clear();
     void Update();
+
+    void ColorOn(short color);
+    void ColorOff(short color);
 
     void DrawBorder();
 
